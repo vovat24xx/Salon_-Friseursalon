@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOIR BARBER CLUB · Premium Barbershop (Demo-Website)</title>
+<meta name="description" content="Demo website for the fictional premium barbershop NOIR BARBER CLUB. A sample template showing services, gallery and contact sections.">
+<meta property="og:title" content="NOIR BARBER CLUB · Demo Website">
+<meta property="og:description" content="Precision cuts. Timeless style. A fictional barbershop demo template.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=1200&q=75">
+<meta name="theme-color" content="#0d0d0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0c'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23b8955a' font-family='serif'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* NOIR BARBER CLUB demo. Change colors/fonts in :root. */
+:root{--bg:#0d0d0c;--bg2:#161614;--ink:#f1ece2;--mute:#a49d90;--gold:#b8955a;--gold2:#d3b27a;--line:#2e2c28;
+--disp:"Bodoni Moda","Didot","Times New Roman",serif;--body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.65 var(--body);overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:99;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--gold);color:#000;padding:8px 14px;z-index:200}.skip:focus{left:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.wrap{max-width:1180px;margin:auto;padding:0 24px}
+.sec{padding:clamp(72px,10vw,140px) 0}.alt{background:var(--bg2)}
+h1,h2,h3{font-family:var(--disp);font-weight:700;line-height:1.02;letter-spacing:-.01em}
+h2{font-size:clamp(2.2rem,6vw,4.4rem);margin-bottom:20px}
+.label{display:flex;align-items:center;gap:12px;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:16px}
+.label::before{content:"";width:0;height:1px;background:var(--gold);transition:width .8s .2s}
+.in .label::before,.hero .label::before{width:36px}
+.note{color:var(--mute);font-size:.88rem;margin-bottom:28px}.warn{border-left:2px solid var(--gold);padding-left:12px}
+
+/* buttons */
+.btn{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:0 28px;font:700 .8rem var(--body);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold);background:none;color:var(--ink);cursor:pointer;transition:background .3s,color .3s,transform .3s}
+.btn-gold{background:var(--gold);color:#0d0d0c}.btn-gold:hover{background:var(--gold2)}
+.btn-line:hover{background:rgba(184,149,90,.14)}.btn:active{transform:scale(.98)}
+.btn.small{min-height:40px;padding:0 18px}
+.btn[aria-disabled=true]{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:14px}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;padding:14px 24px;transition:background .3s,border-color .3s;border-bottom:1px solid transparent;gap:24px}
+.nav.solid{background:rgba(13,13,12,.92);backdrop-filter:blur(8px);border-color:var(--line)}
+.logo{font:700 1.15rem var(--disp);letter-spacing:.14em;text-decoration:none;flex-shrink:0}
+.nav-right{display:flex;align-items:center;gap:8px;margin-left:auto;order:3}
+.menu{display:flex;align-items:center;gap:28px;margin-left:auto}
+.menu a:not(.btn){text-decoration:none;font-size:.85rem;color:var(--mute);transition:color .2s}.menu a:not(.btn):hover{color:var(--ink)}
+.burger{display:none;width:48px;height:48px;background:none;border:0;cursor:pointer;position:relative}
+.burger span{position:absolute;left:12px;right:12px;height:2px;background:var(--ink);transition:transform .3s}
+.burger span:first-child{top:19px}.burger span:last-child{top:27px}
+.burger[aria-expanded=true] span:first-child{transform:translateY(4px) rotate(45deg)}
+.burger[aria-expanded=true] span:last-child{transform:translateY(-4px) rotate(-45deg)}
+
+/* language switcher */
+.lang{position:relative;z-index:80}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;background:transparent;border:1px solid var(--line);color:var(--ink);font:700 .75rem var(--body);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:border-color .25s,background .25s}
+.lang-btn:hover,.lang-btn[aria-expanded=true]{border-color:var(--gold);background:rgba(184,149,90,.1)}
+.lang-code{min-width:1.6em}
+.lang-chevron{transition:transform .25s;opacity:.7}
+.lang-btn[aria-expanded=true] .lang-chevron{transform:rotate(180deg)}
+.lang-menu{position:absolute;top:calc(100% + 6px);right:0;min-width:160px;margin:0;padding:6px 0;list-style:none;background:var(--bg2);border:1px solid var(--line);box-shadow:0 12px 32px rgba(0,0,0,.45);z-index:90}
+.lang-menu[hidden]{display:none}
+.lang-menu li{padding:10px 16px;font-size:.82rem;color:var(--mute);cursor:pointer;transition:background .2s,color .2s}
+.lang-menu li:hover,.lang-menu li:focus{background:rgba(184,149,90,.12);color:var(--ink);outline:none}
+.lang-menu li[aria-selected=true]{color:var(--gold2);font-weight:700}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:120px 24px 90px;overflow:hidden;background:linear-gradient(135deg,#1c1a16,#0d0d0c)}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;animation:zoom 14s ease-out both}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 4%,rgba(13,13,12,.2) 60%,rgba(13,13,12,.55))}
+.hero-in{position:relative;z-index:2;max-width:1180px;width:100%;margin:auto}
+.hero h1{font-size:clamp(3rem,10.5vw,8.6rem);text-transform:uppercase;margin-bottom:22px}
+.hero h1 span{display:block}.hero h1 span+span{color:var(--gold2);font-style:italic;font-weight:500}
+.lead{max-width:460px;color:#d6d0c4;margin-bottom:34px;font-size:1.1rem}
+.hero .label,.hero h1 span,.lead,.hero .row{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(1){animation-delay:.1s}.hero h1 span:nth-child(2){animation-delay:.25s}.lead{animation-delay:.4s}.hero .row{animation-delay:.55s}
+.demo-tag{position:absolute;z-index:2;right:24px;bottom:24px;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);padding:6px 12px;background:rgba(13,13,12,.7)}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}}@keyframes zoom{from{transform:scale(1.08)}}
+
+/* services */
+.svc{list-style:none;padding:0;border-top:1px solid var(--line)}
+.svc li{display:grid;grid-template-columns:1fr auto;gap:6px 32px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);transition:padding .35s}
+.svc li:hover{padding-left:14px}
+.svc h3{font-size:1.7rem;grid-column:1}.svc p{color:var(--mute);grid-column:1;max-width:520px}
+.svc .meta{grid-column:2;grid-row:1/3;text-align:right}
+.svc .price{display:block;font:700 2rem var(--disp);color:var(--gold2)}.svc .dur{font-size:.8rem;color:var(--mute)}
+.svc .btn{grid-column:2;margin-top:8px}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,6vw,90px);align-items:center}
+.about figure{aspect-ratio:4/5;overflow:hidden;background:#222;margin-top:40px}
+.about img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.05)}
+.pr{margin-top:30px;border-top:1px solid var(--line)}
+.pr div{padding:16px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:130px 1fr;gap:12px}
+.pr dt{font:700 1.15rem var(--disp);color:var(--gold2)}.pr dd{color:var(--mute);margin:0}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:10px;margin-top:30px}
+.gal button{padding:0;border:0;background:#1b1a17;overflow:hidden;cursor:zoom-in;position:relative}
+.gal button:nth-child(1){grid-column:span 2;grid-row:span 2}.gal button:nth-child(4){grid-row:span 2}.gal button:nth-child(5){grid-column:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;filter:grayscale(.4);transition:transform .6s,filter .4s}
+.gal button:hover img{transform:scale(1.05);filter:none}
+
+/* reviews */
+.rev{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+blockquote{padding:32px 28px 0 0;margin-right:28px;border-right:1px solid var(--line)}blockquote:last-child{border:0}
+.stars{color:var(--gold);letter-spacing:3px;margin-bottom:12px}
+blockquote p{font:500 1.35rem/1.35 var(--disp);margin-bottom:16px}cite{font-size:.78rem;color:var(--mute);font-style:normal}
+
+/* contact, footer */
+.ct{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:20px}.ct .row{grid-column:1/-1}
+address{font-style:normal;font-size:1.2rem}
+.hours{border-collapse:collapse;width:100%}.hours td{padding:8px 0;border-bottom:1px solid var(--line)}.hours td:last-child{text-align:right;color:var(--mute)}
+.foot{padding:48px 24px;text-align:center;border-top:1px solid var(--line);color:var(--mute);font-size:.85rem;display:grid;gap:10px;padding-bottom:100px}
+.top{position:fixed;right:18px;bottom:18px;width:48px;height:48px;background:var(--bg2);color:var(--gold2);border:1px solid var(--gold);cursor:pointer;z-index:40;font-size:1.2rem}
+.sticky-cta{display:none}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.94);display:grid;place-items:center;padding:20px}.lb[hidden]{display:none}
+.lb img{max-height:88vh;max-width:100%;object-fit:contain}
+.lb-x{position:absolute;top:14px;right:14px;width:48px;height:48px;background:none;border:1px solid var(--gold);color:var(--ink);cursor:pointer;font-size:1.1rem}
+
+/* reveal */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s}.js .reveal.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+.burger{display:block}
+.menu{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;gap:22px;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;margin-left:0}
+.menu.open{opacity:1;visibility:visible}.menu a:not(.btn){font:700 2rem var(--disp);color:var(--ink)}
+.nav{z-index:60}.burger{z-index:70}.lang{z-index:80}
+.nav-right{order:2;margin-left:auto}
+.menu{order:3}
+.about,.ct,.rev{grid-template-columns:1fr}.about figure{margin-top:0}
+blockquote{border:0;border-bottom:1px solid var(--line);margin:0;padding:24px 0}
+.gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.gal button:nth-child(n){grid-column:auto;grid-row:auto}.gal button:nth-child(1){grid-column:span 2;grid-row:span 2}
+.svc li{grid-template-columns:1fr}.svc .meta,.svc .btn{grid-column:1;grid-row:auto;text-align:left}.svc .btn{justify-self:start}
+.pr div{grid-template-columns:1fr}.demo-tag{left:24px;right:auto;bottom:16px}.hero{padding-bottom:70px}
+.sticky-cta{display:flex;position:fixed;left:12px;right:80px;bottom:12px;z-index:40}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#home" data-i="brand">NOIR BARBER CLUB</a>
+  <div class="nav-right">
+    <div class="lang" id="lang">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+        <span class="lang-code" id="langCode">DE</span>
+        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="lang-menu" id="langMenu" role="listbox" hidden>
+        <li role="option" data-lang="de" aria-selected="true">DE · Deutsch</li>
+        <li role="option" data-lang="en" aria-selected="false">EN · English</li>
+        <li role="option" data-lang="uk" aria-selected="false">UK · Українська</li>
+        <li role="option" data-lang="ru" aria-selected="false">RU · Русский</li>
+      </ul>
+    </div>
+    <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+  </div>
+  <nav id="menu" class="menu" aria-label="Main">
+    <a href="#home" data-i18n="navHome">Start</a>
+    <a href="#services" data-i18n="navServices">Leistungen</a>
+    <a href="#about" data-i18n="navAbout">Über uns</a>
+    <a href="#gallery" data-i18n="navGallery">Galerie</a>
+    <a href="#reviews" data-i18n="navReviews">Bewertungen</a>
+    <a href="#contact" data-i18n="navContact">Kontakt</a>
+    <a class="btn btn-gold small" href="#contact" data-i18n="contactCTA">Kontakt</a>
+  </nav>
+</header>
+
+<main id="main">
+<section class="hero" id="home">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=1800&q=80" alt="Barber giving a precision haircut in a premium barbershop" fetchpriority="high">
+  <div class="hero-in">
+    <p class="label" data-i18n="heroLabel">Premium Barbershop</p>
+    <h1><span data-i18n="heroH1a">Dein Stil.</span> <span data-i18n="heroH1b">Deine Handschrift.</span></h1>
+    <p class="lead" data-i18n="heroLead">Präzise Schnitte. Zeitloser Stil. Ein Erlebnis, das um dich gebaut ist.</p>
+    <div class="row">
+      <a class="btn btn-gold" href="#services" data-i18n="heroCta">Leistungen ansehen</a>
+      <a class="btn btn-line" href="#services" data-i18n="heroSecondary">Leistungen entdecken</a>
+    </div>
+  </div>
+  <p class="demo-tag" data-i18n="demoTag">Demo-Website · Musterbetrieb</p>
+</section>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <p class="label reveal" data-i18n="servicesLabel">Leistungen</p>
+    <h2 class="reveal" data-i18n="servicesH2">Die Karte.</h2>
+    <p class="note reveal" data-i18n="servicesNote">Alle Preise sind illustrative Demo-Preise.</p>
+    <ul class="svc" id="svcList"></ul>
+  </div>
+</section>
+
+<section class="sec alt" id="about">
+  <div class="wrap about">
+    <figure class="reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?auto=format&fit=crop&w=1000&q=80" alt="Classic barbershop interior with chairs and mirrors"></figure>
+    <div>
+      <p class="label reveal" data-i18n="aboutLabel">Über uns</p>
+      <h2 class="reveal" data-i18n="aboutH2">Mehr als ein Haarschnitt.</h2>
+      <p class="reveal" data-i18n="aboutText">Noir Barber Club ist ein fiktiver Salon mit einer Idee: Ein guter Schnitt soll unaufgeregt sein. Wir nehmen uns Zeit zum Zuhören, messen zweimal und ziehen jede Linie von Hand nach – damit das Ergebnis zu dir passt und gut nachwächst.</p>
+      <dl class="pr reveal">
+        <div><dt data-i18n="principle1">Präzision</dt><dd data-i18n="principle1Desc">Saubere Linien und ausgewogene Formen, aus jedem Winkel geprüft.</dd></div>
+        <div><dt data-i18n="principle2">Handwerk</dt><dd data-i18n="principle2Desc">Klassische Werkzeuge und Techniken, mit Geduld angewendet.</dd></div>
+        <div><dt data-i18n="principle3">Erlebnis</dt><dd data-i18n="principle3Desc">Ein ruhiger Stuhl, ein gutes Gespräch und keine Eile.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <p class="label reveal" data-i18n="galleryLabel">Galerie</p>
+    <h2 class="reveal" data-i18n="galleryH2">Die Arbeit.</h2>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<section class="sec alt" id="reviews">
+  <div class="wrap">
+    <p class="label reveal" data-i18n="reviewsLabel">Beispiel-Bewertungen</p>
+    <h2 class="reveal" data-i18n="reviewsH2">Was Gäste sagen könnten.</h2>
+    <p class="note reveal" data-i18n="reviewsNote">Dies sind fiktive Beispiel-Bewertungen nur zur Demonstration, kein echtes Kundenfeedback.</p>
+    <div class="rev">
+      <blockquote class="reveal"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p data-i18n="review1">Scharfer Fade, keine Eile. Ich bin genau so rausgekommen, wie ich es mir vorgestellt habe.</p><cite data-i18n="review1Cite">Beispiel-Bewertung · Gast A</cite></blockquote>
+      <blockquote class="reveal"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p data-i18n="review2">Der Bartschnitt war präzise und der Stuhl wirklich bequem.</p><cite data-i18n="review2Cite">Beispiel-Bewertung · Gast B</cite></blockquote>
+      <blockquote class="reveal"><div class="stars" aria-label="4 out of 5 stars">★★★★☆</div><p data-i18n="review3">Mit meinem Sohn dort gewesen. Geduldig, freundlich und ein tolles Ergebnis für uns beide.</p><cite data-i18n="review3Cite">Beispiel-Bewertung · Gast C</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec alt" id="contact">
+  <div class="wrap">
+    <p class="label reveal" data-i18n="contactLabel">Kontakt</p>
+    <h2 class="reveal" data-i18n="contactH2">Finde uns.</h2>
+    <p class="note warn reveal" data-i18n="contactWarn">Fiktive Demo-Angaben. An dieser Adresse existiert kein echtes Unternehmen.</p>
+    <div class="ct">
+      <address class="reveal"><span data-i="address"></span><br><span data-i="phoneText"></span></address>
+      <table class="hours reveal"><caption class="sr" data-i18n="hoursCaption">Öffnungszeiten (Demo)</caption><tbody id="hours"></tbody></table>
+      <div class="row reveal" id="actions"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <a class="logo" href="#home" data-i="brand">NOIR BARBER CLUB</a>
+  <p data-i18n="footerNote">Demo-Website mit fiktiven Betriebsangaben. Fotos über Unsplash.</p>
+</footer>
+
+<a class="sticky-cta btn btn-gold" href="#contact" data-i18n="stickyCta">Finde uns</a>
+<button class="top" id="top" aria-label="Nach oben" hidden data-i18n-aria="backToTop">↑</button>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+  <button class="lb-x" id="lbX" aria-label="Bild schließen" data-i18n-aria="closeImage">✕</button>
+  <img id="lbImg" alt="">
+</div>
+
+<script>
+/* ===== TRANSLATIONS =====
+   Central dictionary for DE (default), EN, UK, RU.
+   Business names, prices, phone numbers and addresses stay in CONFIG / SERVICES.
+   Only UI strings are translated.
+*/
+const TRANSLATIONS = {
+  de: {
+    /* Meta / document */
+    pageTitle: " · Premium Barbershop (Demo-Website)",
+    skip: "Zum Inhalt springen",
+    /* Nav */
+    navHome: "Start",
+    navServices: "Leistungen",
+    navAbout: "Über uns",
+    navGallery: "Galerie",
+    navReviews: "Bewertungen",
+    navContact: "Kontakt",
+    contactCTA: "Kontakt",
+    /* Language switcher */
+    langLabel: "Sprache",
+    langDe: "Deutsch",
+    langEn: "English",
+    langUk: "Українська",
+    langRu: "Русский",
+    /* Hero */
+    heroLabel: "Premium Barbershop",
+    heroH1a: "Dein Stil.",
+    heroH1b: "Deine Handschrift.",
+    heroLead: "Präzise Schnitte. Zeitloser Stil. Ein Erlebnis, das um dich gebaut ist.",
+    heroCta: "Leistungen ansehen",
+    heroSecondary: "Leistungen entdecken",
+    demoTag: "Demo-Website · Musterbetrieb",
+    /* Services */
+    servicesLabel: "Leistungen",
+    servicesH2: "Die Karte.",
+    servicesNote: "Alle Preise sind illustrative Demo-Preise.",
+    serviceCTA: "Kontakt aufnehmen",
+    /* About */
+    aboutLabel: "Über uns",
+    aboutH2: "Mehr als ein Haarschnitt.",
+    aboutText: "Noir Barber Club ist ein fiktiver Salon mit einer Idee: Ein guter Schnitt soll unaufgeregt sein. Wir nehmen uns Zeit zum Zuhören, messen zweimal und ziehen jede Linie von Hand nach – damit das Ergebnis zu dir passt und gut nachwächst.",
+    principle1: "Präzision",
+    principle1Desc: "Saubere Linien und ausgewogene Formen, aus jedem Winkel geprüft.",
+    principle2: "Handwerk",
+    principle2Desc: "Klassische Werkzeuge und Techniken, mit Geduld angewendet.",
+    principle3: "Erlebnis",
+    principle3Desc: "Ein ruhiger Stuhl, ein gutes Gespräch und keine Eile.",
+    /* Gallery */
+    galleryLabel: "Galerie",
+    galleryH2: "Die Arbeit.",
+    enlarge: "Vergrößern: ",
+    closeImage: "Bild schließen",
+    /* Reviews */
+    reviewsLabel: "Beispiel-Bewertungen",
+    reviewsH2: "Was Gäste sagen könnten.",
+    reviewsNote: "Dies sind fiktive Beispiel-Bewertungen nur zur Demonstration, kein echtes Kundenfeedback.",
+    review1: "Scharfer Fade, keine Eile. Ich bin genau so rausgekommen, wie ich es mir vorgestellt habe.",
+    review1Cite: "Beispiel-Bewertung · Gast A",
+    review2: "Der Bartschnitt war präzise und der Stuhl wirklich bequem.",
+    review2Cite: "Beispiel-Bewertung · Gast B",
+    review3: "Mit meinem Sohn dort gewesen. Geduldig, freundlich und ein tolles Ergebnis für uns beide.",
+    review3Cite: "Beispiel-Bewertung · Gast C",
+
+    /* Contact */
+    contactLabel: "Kontakt",
+    contactH2: "Finde uns.",
+    contactWarn: "Fiktive Demo-Angaben. An dieser Adresse existiert kein echtes Unternehmen.",
+    hoursCaption: "Öffnungszeiten (Demo)",
+    getDirections: "Route anzeigen",
+    callShop: "Barbershop anrufen",
+    contactWhatsApp: "Per WhatsApp kontaktieren",
+    openInstagram: "Instagram öffnen",
+    /* Footer & misc */
+    footerNote: "Demo-Website mit fiktiven Betriebsangaben. Fotos über Unsplash.",
+    stickyCta: "Finde uns",
+    backToTop: "Nach oben",
+    openMenu: "Menü öffnen",
+    closeMenu: "Menü schließen",
+
+    /* Status messages */
+    msgWaNotConfigured: "WhatsApp-Nummer in dieser Demo nicht konfiguriert.",
+    msgMapNotConfigured: "Kartenlink in dieser Demo nicht konfiguriert.",
+    msgPhoneNotConfigured: "Telefonnummer in dieser Demo nicht konfiguriert.",
+    msgIgNotConfigured: "Instagram-Link in dieser Demo nicht konfiguriert.",
+
+    /* Hours day labels (keep times as-is) */
+    dayMonFri: "Mo–Fr",
+    daySaturday: "Samstag",
+    daySunday: "Sonntag",
+    dayClosed: "Geschlossen",
+    /* Service names & descriptions (ids match SERVICES) */
+    svc_classic_name: "Klassischer Haarschnitt",
+    svc_classic_desc: "Schere und Clipper, abschließend mit heißem Handtuch am Nacken.",
+    svc_fade_name: "Skin Fade",
+    svc_fade_desc: "Nahtloser, handverblendeter Fade, abgestimmt auf deine Kopfform.",
+    svc_combo_name: "Haarschnitt & Bart",
+    svc_combo_desc: "Voller Schnitt plus Bartformung, Konturen und Pflegöl.",
+    svc_beard_name: "Bartpflege",
+    svc_beard_desc: "Klare Kanten und eine Form, die zu deinem Gesicht passt.",
+    svc_kids_name: "Kinderhaarschnitt",
+    svc_kids_desc: "Entspannter, geduldiger Schnitt für Gäste unter 12.",
+    svc_premium_name: "Premium Grooming",
+    svc_premium_desc: "Schnitt, Bart, heißes Handtuch und Gesichtsmassage. Das volle Ritual."
+  },
+
+  en: {
+    pageTitle: " · Premium Barbershop (Demo Website)",
+    skip: "Skip to content",
+    navHome: "Home",
+    navServices: "Services",
+    navAbout: "About",
+    navGallery: "Gallery",
+    navReviews: "Reviews",
+    navContact: "Contact",
+    contactCTA: "Contact Us",
+    langLabel: "Language",
+    langDe: "Deutsch",
+    langEn: "English",
+    langUk: "Українська",
+    langRu: "Русский",
+    heroLabel: "Premium barbershop",
+    heroH1a: "Your style.",
+    heroH1b: "Your signature.",
+    heroLead: "Precision cuts. Timeless style. An experience built around you.",
+    heroCta: "View Services",
+    heroSecondary: "Explore services",
+    demoTag: "Demo website · Sample business",
+    servicesLabel: "Services",
+    servicesH2: "The menu.",
+    servicesNote: "All prices are illustrative demo prices.",
+    serviceCTA: "Contact Us",
+    aboutLabel: "About",
+    aboutH2: "More than a haircut.",
+    aboutText: "Noir Barber Club is a fictional shop built around one idea: a good cut should feel unhurried. We take time to listen, measure twice and finish every line by hand, so the result suits you and grows out well.",
+    principle1: "Precision",
+    principle1Desc: "Clean lines and balanced shapes, checked from every angle.",
+    principle2: "Craftsmanship",
+    principle2Desc: "Classic tools and techniques, applied with patience.",
+    principle3: "Experience",
+    principle3Desc: "A calm chair, a good conversation and no rush.",
+    galleryLabel: "Gallery",
+    galleryH2: "The work.",
+    enlarge: "Enlarge: ",
+    closeImage: "Close image",
+    reviewsLabel: "Sample reviews",
+    reviewsH2: "What guests might say.",
+    reviewsNote: "These are fictional sample reviews for demonstration only, not real customer feedback.",
+    review1: "Sharp fade, no rushing. I left looking exactly how I pictured.",
+    review1Cite: "Sample review · Guest A",
+    review2: "The beard trim was precise and the chair was genuinely comfortable.",
+    review2Cite: "Sample review · Guest B",
+    review3: "Visited with my son. Patient, friendly and a great result for both of us.",
+    review3Cite: "Sample review · Guest C",
+    contactLabel: "Contact",
+    contactH2: "Find us.",
+    contactWarn: "Fictional demo details. No real business exists at this address.",
+    hoursCaption: "Opening hours (demo)",
+    getDirections: "Get directions",
+    callShop: "Call the barbershop",
+    contactWhatsApp: "Contact via WhatsApp",
+    openInstagram: "Open Instagram",
+    footerNote: "Demo website with fictional business details. Photos via Unsplash.",
+    stickyCta: "Find Us",
+    backToTop: "Back to top",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    msgWaNotConfigured: "WhatsApp number not configured in this demo.",
+    msgMapNotConfigured: "Map link not configured in this demo.",
+    msgPhoneNotConfigured: "Phone number not configured in this demo.",
+    msgIgNotConfigured: "Instagram link not configured in this demo.",
+    dayMonFri: "Mon–Fri",
+    daySaturday: "Saturday",
+    daySunday: "Sunday",
+    dayClosed: "Closed",
+    svc_classic_name: "Classic Haircut",
+    svc_classic_desc: "Scissor and clipper work finished with a hot-towel neck clean-up.",
+    svc_fade_name: "Skin Fade",
+    svc_fade_desc: "A seamless, hand-blended fade tailored to your head shape.",
+    svc_combo_name: "Haircut & Beard",
+    svc_combo_desc: "Full cut plus beard shaping, lining and conditioning oil.",
+    svc_beard_name: "Beard Trim",
+    svc_beard_desc: "Defined edges and a clean shape that suits your face.",
+    svc_kids_name: "Kids Haircut",
+    svc_kids_desc: "A relaxed, patient cut for guests under 12.",
+    svc_premium_name: "Premium Grooming",
+    svc_premium_desc: "Cut, beard, hot towel and a facial massage. The full ritual."
+  },
+
+  uk: {
+    pageTitle: " · Преміум барбершоп (демо-сайт)",
+    skip: "Перейти до вмісту",
+    navHome: "Головна",
+    navServices: "Послуги",
+    navAbout: "Про нас",
+    navGallery: "Галерея",
+    navReviews: "Відгуки",
+    navContact: "Контакти",
+    contactCTA: "Зв’язатися",
+    langLabel: "Мова",
+    langDe: "Deutsch",
+    langEn: "English",
+    langUk: "Українська",
+    langRu: "Русский",
+    heroLabel: "Преміум барбершоп",
+    heroH1a: "Твій стиль.",
+    heroH1b: "Твій почерк.",
+    heroLead: "Точні стрижки. Вічний стиль. Досвід, створений навколо тебе.",
+    heroCta: "Переглянути послуги",
+    heroSecondary: "Дивитися послуги",
+    demoTag: "Демо-сайт · Зразок бізнесу",
+    servicesLabel: "Послуги",
+    servicesH2: "Меню.",
+    servicesNote: "Усі ціни — ілюстративні демо-ціни.",
+    serviceCTA: "Зв’язатися",
+    aboutLabel: "Про нас",
+    aboutH2: "Більше, ніж стрижка.",
+    aboutText: "Noir Barber Club — вигаданий салон з однією ідеєю: хороша стрижка має бути неквапливою. Ми слухаємо, двічі вимірюємо і закінчуємо кожну лінію вручну, щоб результат підходив тобі і гарно відростав.",
+    principle1: "Точність",
+    principle1Desc: "Чисті лінії та збалансовані форми, перевірені з кожного кута.",
+    principle2: "Майстерність",
+    principle2Desc: "Класичні інструменти та техніки — з терпінням і увагою.",
+    principle3: "Досвід",
+    principle3Desc: "Спокійне крісло, гарна розмова і жодного поспіху.",
+    galleryLabel: "Галерея",
+    galleryH2: "Роботи.",
+    enlarge: "Збільшити: ",
+    closeImage: "Закрити зображення",
+    reviewsLabel: "Зразкові відгуки",
+    reviewsH2: "Що могли б сказати гості.",
+    reviewsNote: "Це вигадані зразкові відгуки лише для демонстрації, не реальні відгуки клієнтів.",
+    review1: "Чіткий фейд, без поспіху. Вийшов саме таким, як уявляв.",
+    review1Cite: "Зразковий відгук · Гість A",
+    review2: "Стрижка бороди була точною, а крісло справді зручним.",
+    review2Cite: "Зразковий відгук · Гість B",
+    review3: "Були з сином. Терпляче, привітно й чудовий результат для нас обох.",
+    review3Cite: "Зразковий відгук · Гість C",
+    contactLabel: "Контакти",
+    contactH2: "Знайдіть нас.",
+    contactWarn: "Вигадані демо-дані. За цією адресою реального бізнесу немає.",
+    hoursCaption: "Години роботи (демо)",
+    getDirections: "Прокласти маршрут",
+    callShop: "Подзвонити в барбершоп",
+    contactWhatsApp: "Написати в WhatsApp",
+    openInstagram: "Відкрити Instagram",
+    footerNote: "Демо-сайт з вигаданими даними бізнесу. Фото — Unsplash.",
+    stickyCta: "Знайти нас",
+    backToTop: "Вгору",
+    openMenu: "Відкрити меню",
+    closeMenu: "Закрити меню",
+    msgWaNotConfigured: "Номер WhatsApp у цій демо не налаштовано.",
+    msgMapNotConfigured: "Посилання на карту у цій демо не налаштовано.",
+    msgPhoneNotConfigured: "Номер телефону у цій демо не налаштовано.",
+    msgIgNotConfigured: "Посилання на Instagram у цій демо не налаштовано.",
+    dayMonFri: "Пн–Пт",
+    daySaturday: "Субота",
+    daySunday: "Неділя",
+    dayClosed: "Зачинено",
+    svc_classic_name: "Класична стрижка",
+    svc_classic_desc: "Ножиці та машинка, на завершення — гарячий рушник на шиї.",
+    svc_fade_name: "Skin Fade",
+    svc_fade_desc: "Безшовний фейд, змішаний вручну під форму голови.",
+    svc_combo_name: "Стрижка + борода",
+    svc_combo_desc: "Повна стрижка, формування бороди, контури та олія для догляду.",
+    svc_beard_name: "Стрижка бороди",
+    svc_beard_desc: "Чіткі контури та форма, що пасує до обличчя.",
+    svc_kids_name: "Дитяча стрижка",
+    svc_kids_desc: "Спокійна, терпляча стрижка для гостей до 12 років.",
+    svc_premium_name: "Преміум грумінг",
+    svc_premium_desc: "Стрижка, борода, гарячий рушник і масаж обличчя. Повний ритуал."
+  },
+
+  ru: {
+    pageTitle: " · Премиум барбершоп (демо-сайт)",
+    skip: "Перейти к содержимому",
+    navHome: "Главная",
+    navServices: "Услуги",
+    navAbout: "О нас",
+    navGallery: "Галерея",
+    navReviews: "Отзывы",
+    navContact: "Контакты",
+    contactCTA: "Связаться",
+    langLabel: "Язык",
+    langDe: "Deutsch",
+    langEn: "English",
+    langUk: "Українська",
+    langRu: "Русский",
+    heroLabel: "Премиум барбершоп",
+    heroH1a: "Твой стиль.",
+    heroH1b: "Твоя подпись.",
+    heroLead: "Точные стрижки. Вневременной стиль. Опыт, созданный вокруг тебя.",
+    heroCta: "Смотреть услуги",
+    heroSecondary: "Смотреть услуги",
+    demoTag: "Демо-сайт · Образец бизнеса",
+    servicesLabel: "Услуги",
+    servicesH2: "Меню.",
+    servicesNote: "Все цены — иллюстративные демо-цены.",
+    serviceCTA: "Связаться",
+    aboutLabel: "О нас",
+    aboutH2: "Больше, чем стрижка.",
+    aboutText: "Noir Barber Club — вымышленный салон с одной идеей: хорошая стрижка должна быть неспешной. Мы слушаем, дважды измеряем и заканчиваем каждую линию вручную, чтобы результат подходил тебе и хорошо отрастал.",
+    principle1: "Точность",
+    principle1Desc: "Чистые линии и сбалансированные формы, проверенные с каждого угла.",
+    principle2: "Мастерство",
+    principle2Desc: "Классические инструменты и техники, применяемые с терпением.",
+    principle3: "Опыт",
+    principle3Desc: "Спокойное кресло, хороший разговор и без спешки.",
+    galleryLabel: "Галерея",
+    galleryH2: "Работа.",
+    enlarge: "Увеличить: ",
+    closeImage: "Закрыть изображение",
+    reviewsLabel: "Образцы отзывов",
+    reviewsH2: "Что могли бы сказать гости.",
+    reviewsNote: "Это вымышленные образцы отзывов только для демонстрации, не реальные отзывы клиентов.",
+    review1: "Чёткий фейд, без спешки. Я вышел именно таким, как представлял.",
+    review1Cite: "Образец отзыва · Гость A",
+    review2: "Стрижка бороды была точной, а кресло действительно удобным.",
+    review2Cite: "Образец отзыва · Гость B",
+    review3: "Приходили с сыном. Терпеливо, дружелюбно и отличный результат для нас обоих.",
+    review3Cite: "Образец отзыва · Гость C",
+    contactLabel: "Контакты",
+    contactH2: "Найдите нас.",
+    contactWarn: "Вымышленные демо-данные. По этому адресу реального бизнеса не существует.",
+    hoursCaption: "Часы работы (демо)",
+    getDirections: "Построить маршрут",
+    callShop: "Позвонить в барбершоп",
+    contactWhatsApp: "Связаться через WhatsApp",
+    openInstagram: "Открыть Instagram",
+    footerNote: "Демо-сайт с вымышленными бизнес-данными. Фото через Unsplash.",
+    stickyCta: "Как нас найти",
+    backToTop: "Наверх",
+    openMenu: "Открыть меню",
+    closeMenu: "Закрыть меню",
+    msgWaNotConfigured: "Номер WhatsApp в этой демо не настроен.",
+    msgMapNotConfigured: "Ссылка на карту в этой демо не настроена.",
+    msgPhoneNotConfigured: "Номер телефона в этой демо не настроен.",
+    msgIgNotConfigured: "Ссылка на Instagram в этой демо не настроена.",
+    dayMonFri: "Пн–Пт",
+    daySaturday: "Суббота",
+    daySunday: "Воскресенье",
+    dayClosed: "Закрыто",
+    svc_classic_name: "Классическая стрижка",
+    svc_classic_desc: "Работа ножницами и машинкой с горячим полотенцем на шее.",
+    svc_fade_name: "Skin Fade",
+    svc_fade_desc: "Бесшовный фейд, смешанный вручную под форму головы.",
+    svc_combo_name: "Стрижка и борода",
+    svc_combo_desc: "Полная стрижка плюс формирование бороды, контуры и масло.",
+    svc_beard_name: "Стрижка бороды",
+    svc_beard_desc: "Чёткие края и форма, подходящая к лицу.",
+    svc_kids_name: "Детская стрижка",
+    svc_kids_desc: "Спокойная, терпеливая стрижка для гостей до 12 лет.",
+    svc_premium_name: "Премиум груминг",
+    svc_premium_desc: "Стрижка, борода, горячее полотенце и массаж лица. Полный ритуал."
+  }
+};
+
+/* Helper: get translation for current language, fallback to EN then key */
+function t(key, lang) {
+  const L = lang || (typeof currentLang !== "undefined" ? currentLang : "de");
+  return (TRANSLATIONS[L] && TRANSLATIONS[L][key]) ||
+         (TRANSLATIONS.en && TRANSLATIONS.en[key]) ||
+         key;
+}
+
+
+/* ===== CONFIGURATION: edit this block for each client ===== */
+const CONFIG = {
+  brand: "NOIR BARBER CLUB",
+  address: "Demo Street 12, Munich, Germany (fictional)",
+  phone: "",            // e.g. "+49 89 000000". Empty = call button disabled
+  phoneText: "Phone: not configured (demo)",
+  whatsapp: "",         // digits only with country code, e.g. "4915112345678". Empty = disabled
+  instagram: "",        // full URL, e.g. "https://instagram.com/yourshop". Empty = disabled
+  mapLink: "",          // full Google/Apple Maps URL. Empty = disabled
+  currency: "€",
+  hours: [
+    ["dayMonFri", "10:00–19:00"],
+    ["daySaturday", "09:00–17:00"],
+    ["daySunday", "dayClosed"]
+  ],
+};
+
+/* Services: edit, add or remove entries. id must be unique.
+   name/desc keys map to translations (svc_<id>_name / svc_<id>_desc).
+   Fallback to these English strings if no translation exists. */
+const SERVICES = [
+  { id: "classic",  name: "Classic Haircut",   price: 25, desc: "Scissor and clipper work finished with a hot-towel neck clean-up." },
+  { id: "fade",     name: "Skin Fade",         price: 30, desc: "A seamless, hand-blended fade tailored to your head shape." },
+  { id: "combo",    name: "Haircut & Beard",   price: 40, desc: "Full cut plus beard shaping, lining and conditioning oil." },
+  { id: "beard",    name: "Beard Trim",        price: 18, desc: "Defined edges and a clean shape that suits your face." },
+  { id: "kids",     name: "Kids Haircut",      price: 20, desc: "A relaxed, patient cut for guests under 12." },
+  { id: "premium",  name: "Premium Grooming",  price: 50, desc: "Cut, beard, hot towel and a facial massage. The full ritual." }
+];
+
+/* Gallery: swap URLs or use local files like "images/cut1.jpg". */
+const U = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=75`;
+const GALLERY = [
+  { src: U("photo-1621607512214-68297480165e"), alt: "Barber giving a precision haircut in the chair" },
+  { src: U("photo-1622286342621-4bd786c2447c"), alt: "Close-up of a fresh skin fade haircut" },
+  { src: U("photo-1599351431202-1e0f0137899a"), alt: "Barber styling a client's hair with care" },
+  { src: U("photo-1605497788044-5a32c7078486"), alt: "Beard trimmed with a straight razor" },
+  { src: U("photo-1493256338651-d82f7acb2b38"), alt: "Classic barbershop interior with chairs and mirrors" },
+  { src: U("photo-1567894340315-735d7c361db0"), alt: "Man with a sharp fade and well-groomed beard" }
+];
+/* ===== END CONFIGURATION ===== */
+
+document.documentElement.classList.add("js");
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const fmt = n => CONFIG.currency + n;
+
+/* ---------- i18n ---------- */
+const LANGS = ["de", "en", "uk", "ru"];
+const LANG_CODES = { de: "DE", en: "EN", uk: "UK", ru: "RU" };
+let currentLang = localStorage.getItem("noir-lang") || "de";
+if (!LANGS.includes(currentLang)) currentLang = "de";
+
+function svcName(s) {
+  return t("svc_" + s.id + "_name") !== "svc_" + s.id + "_name" ? t("svc_" + s.id + "_name") : s.name;
+}
+function svcDesc(s) {
+  return t("svc_" + s.id + "_desc") !== "svc_" + s.id + "_desc" ? t("svc_" + s.id + "_desc") : s.desc;
+}
+
+function applyStaticI18n() {
+  $$("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (key) el.textContent = t(key);
+  });
+  $$("[data-i18n-aria]").forEach(el => {
+    const key = el.dataset.i18nAria;
+    if (key) el.setAttribute("aria-label", t(key));
+  });
+  document.documentElement.lang = currentLang;
+  document.title = CONFIG.brand + t("pageTitle");
+  $("#langCode").textContent = LANG_CODES[currentLang] || currentLang.toUpperCase();
+  $$("#langMenu [role=option]").forEach(li => {
+    li.setAttribute("aria-selected", li.dataset.lang === currentLang ? "true" : "false");
+  });
+  const langBtn = $("#langBtn");
+  if (langBtn) langBtn.setAttribute("aria-label", t("langLabel"));
+}
+
+function renderServices() {
+  $("#svcList").innerHTML = SERVICES.map(s => `
+    <li class="reveal in"><h3>${svcName(s)}</h3><p>${svcDesc(s)}</p>
+    <div class="meta"><span class="price">${fmt(s.price)}</span></div>
+    <a class="btn btn-line small" href="#contact">${t("serviceCTA")}</a></li>`).join("");
+}
+
+function renderHours() {
+  $("#hours").innerHTML = CONFIG.hours.map(([dayKey, timeKey]) => {
+    const day = t(dayKey);
+    const time = timeKey === "dayClosed" ? t("dayClosed") : timeKey;
+    return `<tr><td>${day}</td><td>${time}</td></tr>`;
+  }).join("");
+}
+
+function renderGallery() {
+  $("#gal").innerHTML = GALLERY.map((g, i) =>
+    `<button type="button" data-g="${i}" aria-label="${t("enlarge")}${g.alt}"><img loading="lazy" src="${g.src}" alt="${g.alt}"></button>`).join("");
+}
+
+function renderActions() {
+  const actions = [
+    [t("getDirections"), CONFIG.mapLink, t("msgMapNotConfigured")],
+    [t("callShop"), CONFIG.phone && "tel:" + CONFIG.phone.replace(/[^\d+]/g, ""), t("msgPhoneNotConfigured")],
+    [t("contactWhatsApp"), CONFIG.whatsapp && "https://wa.me/" + CONFIG.whatsapp.replace(/\D/g, ""), t("msgWaNotConfigured")],
+    [t("openInstagram"), CONFIG.instagram, t("msgIgNotConfigured")]
+  ];
+  $("#actions").innerHTML = actions.map(([label, href, msg]) => href
+    ? `<a class="btn btn-line" href="${href}" target="_blank" rel="noopener">${label}</a>`
+    : `<a class="btn btn-line" href="#contact" aria-disabled="true" data-msg="${msg}">${label}</a>`).join("") +
+    '<p class="note" id="actMsg" role="status" style="width:100%"></p>';
+}
+
+function setLanguage(lang) {
+  if (!LANGS.includes(lang)) return;
+  currentLang = lang;
+  localStorage.setItem("noir-lang", lang);
+  applyStaticI18n();
+  renderServices();
+  renderHours();
+  renderGallery();
+  renderActions();
+  /* Burger aria */
+  const open = $("#menu").classList.contains("open");
+  $("#burger").setAttribute("aria-label", open ? t("closeMenu") : t("openMenu"));
+  closeLangMenu();
+}
+
+/* Language dropdown */
+const langBtn = $("#langBtn"), langMenu = $("#langMenu"), langWrap = $("#lang");
+function openLangMenu() {
+  langMenu.hidden = false;
+  langBtn.setAttribute("aria-expanded", "true");
+  const selected = langMenu.querySelector('[aria-selected="true"]') || langMenu.querySelector("li");
+  if (selected) selected.focus();
+}
+function closeLangMenu() {
+  langMenu.hidden = true;
+  langBtn.setAttribute("aria-expanded", "false");
+}
+langBtn.addEventListener("click", e => {
+  e.stopPropagation();
+  if (langMenu.hidden) openLangMenu(); else closeLangMenu();
+});
+langMenu.addEventListener("click", e => {
+  const li = e.target.closest("[data-lang]");
+  if (li) setLanguage(li.dataset.lang);
+});
+document.addEventListener("click", e => {
+  if (!langWrap.contains(e.target)) closeLangMenu();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && !langMenu.hidden) {
+    closeLangMenu();
+    langBtn.focus();
+  }
+});
+/* Keyboard nav inside menu */
+langMenu.addEventListener("keydown", e => {
+  const items = [...langMenu.querySelectorAll("[role=option]")];
+  const idx = items.indexOf(document.activeElement);
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    items[(idx + 1) % items.length].focus();
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    items[(idx - 1 + items.length) % items.length].focus();
+  } else if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    const li = document.activeElement.closest("[data-lang]");
+    if (li) setLanguage(li.dataset.lang);
+  } else if (e.key === "Tab") {
+    closeLangMenu();
+  }
+});
+$$("#langMenu [role=option]").forEach(li => { li.tabIndex = 0; });
+
+/* Fill config text (non-translated business data) */
+document.querySelectorAll("[data-i]").forEach(el => el.textContent = CONFIG[el.dataset.i]);
+
+/* Initial render */
+applyStaticI18n();
+renderServices();
+renderHours();
+renderGallery();
+renderActions();
+/* Gallery + lightbox */
+document.querySelectorAll(".gal img,.about img,.hero-img").forEach(img =>
+  img.addEventListener("error", () => { img.style.visibility = "hidden"; }));
+let lastFocus;
+const lb = $("#lb");
+function openLb(i) {
+  lastFocus = document.activeElement;
+  $("#lbImg").src = GALLERY[i].src.replace("w=900", "w=1600");
+  $("#lbImg").alt = GALLERY[i].alt;
+  lb.hidden = false;
+  $("#lbX").focus();
+}
+function closeLb() { lb.hidden = true; lastFocus && lastFocus.focus(); }
+$("#gal").addEventListener("click", e => { const b = e.target.closest("[data-g]"); if (b) openLb(+b.dataset.g); });
+$("#lbX").onclick = closeLb;
+lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+
+/* Mobile menu */
+const burger = $("#burger"), menu = $("#menu");
+function setMenu(open) {
+  menu.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", open);
+  burger.setAttribute("aria-label", open ? t("closeMenu") : t("openMenu"));
+  document.body.style.overflow = open ? "hidden" : "";
+}
+burger.onclick = () => setMenu(!menu.classList.contains("open"));
+menu.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if (!lb.hidden) closeLb();
+  else if (!langMenu.hidden) { closeLangMenu(); langBtn.focus(); }
+  else if (menu.classList.contains("open")) { setMenu(false); burger.focus(); }
+});
+
+/* Scroll effects */
+const nav = $("#nav"), topBtn = $("#top");
+addEventListener("scroll", () => {
+  nav.classList.toggle("solid", scrollY > 40);
+  topBtn.hidden = scrollY < 700;
+}, { passive: true });
+topBtn.onclick = () => scrollTo({ top: 0, behavior: "smooth" });
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+}), { threshold: .12 }) : null;
+document.querySelectorAll(".reveal").forEach(el => io ? io.observe(el) : el.classList.add("in"));
+
+/* Contact action messages */
+$("#actions").addEventListener("click", e => {
+  const a = e.target.closest("[aria-disabled]");
+  if (a) { e.preventDefault(); $("#actMsg").textContent = a.dataset.msg; }
+});
+
+
+</script>
+</body>
+</html>
